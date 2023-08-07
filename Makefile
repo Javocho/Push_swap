@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
+#    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 18:41:42 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/07 18:42:39 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/07 19:32:22 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= push_swap.c push_swap_utils.c
+SRCS	= push_swap.c
 
 OBJS	= $(SRCS:.c=.o)
 

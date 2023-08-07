@@ -3,17 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/07 18:42:36 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:40:07 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int argc, char **argv)
+#include "push_swap.h"
+
+int	is_num(char c)
 {
-	if (argc > 2)
-	{
-		
-	}
+	if (c >= '0')
+}
+
+int	ft_checker(int argc, char **argv)
+{
+	int	i;
+
+	if ()
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc < 2)
+		return (-1);
 }
