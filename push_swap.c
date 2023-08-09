@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/09 20:45:29 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/10 01:19:54 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,28 @@
 int	is_num(char c)
 {
 	return (c >= '0' && c <= '9');
+}
+
+int repeat_checker(int argc, char **argv)
+{
+	int	i;
+	int	j;
+	int n;
+
+	i = 0;
+	j = 0;
+	while (i < argc)
+	{
+		n = ft_atoi(argv[i]);
+		while (j < i && n != ft_atoi(argv[j]))
+			j++;
+		if (i < j)
+		{
+			write(1, "error", 5);
+			return (0);
+		}
+	}
+	return (1);
 }
 
 int	ft_checker(int argc, char **argv)
@@ -35,25 +57,14 @@ int	ft_checker(int argc, char **argv)
 			i++;
 		j++;
 	}
+	if (!repeat_checker(argc, argv))
+		return (0);
 	return (1);
 }
 
 void	insert_stack(int argc, char **argv, t_stack **stk)
 {
-	int		i;
-	t_stack	*seg;
-
-	i = 1;
-	while (i < argc)
-	{
-		seg = ft_lstnew(NULL);
-		if (!seg)
-			return ;
-		seg->content = atoi(argv[i]);
-		ft_lstadd_front(stk, seg);
-		(*stk) = (*stk)->top;
-		i++;
-	}
+	
 }
 
 int	main(int argc, char **argv)
