@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 18:33:54 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/09 19:50:51 by fcosta-f         ###   ########.fr       */
+/*   Created: 2023/08/08 17:46:33 by fcosta-f          #+#    #+#             */
+/*   Updated: 2023/08/08 21:18:02 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
+void	rotate(t_stack **stk)
+{
+	t_stack *last;
 
-#endif
+	last = *stk;
+	while (last->next)
+		last = last->next;
+	last->next = *stk;
+	*stk = (*stk)->next;
+	(*stk)->top = *stk;
+	last->next->next = NULL;    
+}
