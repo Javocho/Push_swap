@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/10 20:08:04 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:14:11 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,29 @@
 int	ft_is_num(char c)
 {
 	return (c >= '0' && c <= '9');
+}
+
+int	ft_atoi2(const char *str)
+{
+	int	i;
+	int	sign;
+	int	result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }
 
 int	repeat_checker(int argc, char **argv)
@@ -27,14 +50,15 @@ int	repeat_checker(int argc, char **argv)
 	j = 0;
 	while (i < argc)
 	{
-		n = ft_atoi(argv[i]);
-		while (j < i && n != ft_atoi(argv[j]))
+		n = ft_atoi2(argv[i]);
+		while (j < i && n != ft_atoi2(argv[j]))
 			j++;
 		if (i < j)
 		{
 			write(1, "error", 5);
 			return (0);
 		}
+		i++;
 	}
 	return (1);
 }
@@ -64,49 +88,59 @@ int	ft_checker(int argc, char **argv)
 	return (1);
 }
 
-void	insert_stack(int argc, char **argv, t_stack **stk)
+void	insert_stack(int argc, char **argv, t_stack **stk, t_info *info)
 {
-	t_node	*node;
+	t_stack	*node;
 	int		i;
 
 	i = 2;
-	node = malloc(sizeof(t_node *) * 1);
-	node->content = ft_atoi(argv[1]);
+	node = malloc(sizeof(t_stack *) * 1);
+	node->content = ft_atoi2(argv[1]);
 	node->index = 0;
-	(*stk)->size = argc - 1;
-	(*stk)->first = node;
+	info->size_a = argc - 1;
+	(*stk)->top = node;
 	while (argc < i)
 	{
-		node->next = malloc(sizeof(t_node *) * 1);
+		node->next = malloc(sizeof(t_stack *) * 1);
 		node = node->next;
+		node->content = ft_atoi2(argv[i]);
 		node->index = i - 1;
-		(*stk)->last = node;
+		i++;
 	}
 }
 
-void	free_stack(t_stack **stk)
+void	free_stack(t_stack **stk, t_info info)
 {
-	t_node node;
+	t_stack *node;
+	t_stack *tmp;
+	int		i;
 
-	node = (*stk)->first;
-	while (node != (*skt)->)
+	i = 0;
+	node = (*stk)->top;
+	while (i < info.size_a)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	//t_stack	*b;
+	t_info	info;
 
 	if (argc < 2)
 		return (-1);
 	if (!ft_checker(argc, argv))
 		return (-1);
-	insert_stack(argc, argv, &a);
+	insert_stack(argc, argv, &a, &info);
 	// while(a->next != NULL)
 	// {
 	// 	printf("%d\n", a->content);
 	// 	a = a->next;
 	// }
-	//free_stack(&a);
+	free_stack(&a, info);
 	a = NULL;
 }

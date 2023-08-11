@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
+#    By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 18:41:42 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/09 20:05:33 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/11 11:04:56 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@${MAKE} -C libft/
 	@${MAKE} -C libft bonus
-	$(CC) $(FLAGS) libft/libft.a $(OBJS) -o ${NAME}
+	$(CC) $(CFLAGS) libft/libft.a $(OBJS) -o ${NAME}
 
 -include $(DEPS)
 
