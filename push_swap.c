@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/11 11:14:11 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:45:30 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,27 @@ int	ft_checker(int argc, char **argv)
 
 void	insert_stack(int argc, char **argv, t_stack **stk, t_info *info)
 {
-	t_stack	*node;
+	t_stack	*new_node;
 	int		i;
 
-	i = 2;
-	node = malloc(sizeof(t_stack *) * 1);
-	node->content = ft_atoi2(argv[1]);
-	node->index = 0;
+	i = 1;
+	*stk = NULL;
 	info->size_a = argc - 1;
-	(*stk)->top = node;
-	while (argc < i)
+	while (i < argc)
 	{
-		node->next = malloc(sizeof(t_stack *) * 1);
-		node = node->next;
-		node->content = ft_atoi2(argv[i]);
-		node->index = i - 1;
+		new_node = malloc(sizeof(t_stack *) * 1);
+		if (!new_node)
+			return ;
+		new_node->content = ft_atoi2(argv[i]);
+		new_node->index = i - 1;
+		// if ((*stk) == NULL)
+		// {
+		// 	(*info).top = new_node;
+		// }
+		
+		(*stk) = new_node;
+		(*stk)->next = NULL;
+		(*stk) = (*stk)->next;
 		i++;
 	}
 }
@@ -116,7 +122,7 @@ void	free_stack(t_stack **stk, t_info info)
 	int		i;
 
 	i = 0;
-	node = (*stk)->top;
+	node = *stk;
 	while (i < info.size_a)
 	{
 		tmp = node->next;
@@ -136,11 +142,11 @@ int	main(int argc, char **argv)
 	if (!ft_checker(argc, argv))
 		return (-1);
 	insert_stack(argc, argv, &a, &info);
-	// while(a->next != NULL)
-	// {
-	// 	printf("%d\n", a->content);
-	// 	a = a->next;
-	// }
+	while(a->next != NULL)
+	{
+		printf("%d\n", a->content);
+		a = a->next;
+	}
 	free_stack(&a, info);
 	a = NULL;
 }
