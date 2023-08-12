@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/11 13:45:30 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/12 13:07:30 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	repeat_checker(int argc, char **argv)
 	int	j;
 	int	n;
 
-	i = 0;
-	j = 0;
+	i = 1;
 	while (i < argc)
 	{
 		n = ft_atoi2(argv[i]);
-		while (j < i && n != ft_atoi2(argv[j]))
+		j = i + 1;
+		while (j < argc && n != ft_atoi2(argv[j]))
 			j++;
-		if (i < j)
+		if (j < argc)
 		{
 			write(1, "error", 5);
 			return (0);
@@ -88,65 +88,77 @@ int	ft_checker(int argc, char **argv)
 	return (1);
 }
 
-void	insert_stack(int argc, char **argv, t_stack **stk, t_info *info)
+void	init_stack_values(int argc, char **argv, t_stack *stk)
 {
-	t_stack	*new_node;
+	t_node	*new_node;
 	int		i;
 
 	i = 1;
-	*stk = NULL;
-	info->size_a = argc - 1;
+	if (!stk)
+		return ;
+	stk->size = argc - 1;
+	new_node = malloc(sizeof(t_node *) * 1);
+	if (!new_node)
+		return ;
+	new_node->index = i - 1;
+	new_node->content = ft_atoi2(argv[i++]);
+	stk->node = new_node;
+	stk->top = stk->node;
+	stk->node->next = NULL;
 	while (i < argc)
 	{
-		new_node = malloc(sizeof(t_stack *) * 1);
+		new_node = malloc(sizeof(t_node *) * 1);
 		if (!new_node)
 			return ;
 		new_node->content = ft_atoi2(argv[i]);
 		new_node->index = i - 1;
-		// if ((*stk) == NULL)
-		// {
-		// 	(*info).top = new_node;
-		// }
-		
-		(*stk) = new_node;
-		(*stk)->next = NULL;
-		(*stk) = (*stk)->next;
+		stk->node->next = new_node;
+		stk->node = stk->node->next;
+		stk->node->next = NULL;
 		i++;
 	}
 }
 
-void	free_stack(t_stack **stk, t_info info)
+void	init_stack(t_stack *stk)
 {
-	t_stack *node;
-	t_stack *tmp;
+	stk->size = 0;
+}
+
+void	free_stack(t_stack *stk)
+{
+	t_node	*node;
+	t_node	*tmp;
 	int		i;
 
 	i = 0;
-	node = *stk;
-	while (i < info.size_a)
+	node = stk->top;
+	while (i++ < stk->size)
 	{
 		tmp = node->next;
 		free(node);
+		node = NULL;
 		node = tmp;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	*a;
-	//t_stack	*b;
-	t_info	info;
+	t_stack	a;
+	t_stack	b;
 
 	if (argc < 2)
 		return (-1);
 	if (!ft_checker(argc, argv))
 		return (-1);
-	insert_stack(argc, argv, &a, &info);
-	while(a->next != NULL)
+	init_stack_values(argc, argv, &a);
+	init_stack(&b);
+	rotate(&a);
+	a.node = a.top;
+	while (a.node != NULL)
 	{
-		printf("%d\n", a->content);
-		a = a->next;
+		printf("%d\n", a.node->content);
+		a.node = a.node->next;
 	}
-	free_stack(&a, info);
-	a = NULL;
+	free_stack(&a);
+	free_stack(&b);
 }

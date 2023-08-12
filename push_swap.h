@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:33:54 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/11 13:41:40 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/12 13:02:34 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,22 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+typedef struct s_node
+{
+	struct s_node	*next;
+	int				content;
+	int				index;
+	int				final_index;
+	int				sorted;
+}	t_node;
+
 typedef struct s_stack
 {
-	int				content;
-	struct s_stack	*next;
-	// struct s_stack *top;
-	int				index;
-	int				sorted;
+	struct s_node	*node;
+	struct s_node	*top;
+	int				size;
 }	t_stack;
 
-typedef struct s_info
-{
-	int	size_a;
-	int	size_b;
-	// struct s_stack *top;
-}	t_info;
-
-// typedef struct s_stack
-// {
-// 	t_node	*first;
-// 	t_node	*last;
-// 	int		size;
-// }	t_stack;
+void	rotate(t_stack *stk);
 
 #endif
