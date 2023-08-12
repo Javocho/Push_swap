@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:33:54 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/12 13:02:34 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/12 19:23:28 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ typedef struct s_stack
 }	t_stack;
 
 void	rotate(t_stack *stk);
+void	reverse_rotate(t_stack *stk);
+void	push(t_stack *stk_out, t_stack *stk_in);
+void	swap_stack(t_stack *stk);
 
 #endif
