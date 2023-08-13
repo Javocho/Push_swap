@@ -6,11 +6,11 @@
 #    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 18:41:42 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/12 11:44:53 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/13 12:33:29 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= push_swap.c movements.c
+SRCS	= push_swap.c movements.c three_numbers.c
 
 OBJS	= $(SRCS:.c=.o)
 

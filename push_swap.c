@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/12 19:24:00 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:34:06 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	init_stack_values(int argc, char **argv, t_stack *stk)
 	if (!new_node)
 		return ;
 	new_node->index = i - 1;
-	new_node->content = ft_atoi2(argv[i++]);
+	new_node->data = ft_atoi2(argv[i++]);
 	stk->node = new_node;
 	stk->top = stk->node;
 	stk->node->next = NULL;
@@ -110,7 +110,7 @@ void	init_stack_values(int argc, char **argv, t_stack *stk)
 		new_node = malloc(sizeof(t_node *) * 1);
 		if (!new_node)
 			return ;
-		new_node->content = ft_atoi2(argv[i]);
+		new_node->data = ft_atoi2(argv[i]);
 		new_node->index = i - 1;
 		stk->node->next = new_node;
 		stk->node = stk->node->next;
@@ -152,16 +152,16 @@ int	main(int argc, char **argv)
 		return (-1);
 	init_stack_values(argc, argv, &a);
 	init_stack(&b);
-	swap_stack(&a);
+	sort_three(&a);
 	a.node = a.top;
 	while (a.node != NULL)
 	{
-		printf("%d\n", a.node->content);
+		printf("%d %d\n", a.node->data, a.node->index);
 		a.node = a.node->next;
 	}
 	// while (b.node != NULL)
 	// {
-	// 	printf("%d\n", b.node->content);
+	// 	printf("%d %d\n", b.node->data, b.node->index);
 	// 	b.node = b.node->next;
 	// }
 	free_stack(&a);
