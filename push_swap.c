@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/13 13:34:06 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:22:06 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	ft_checker(int argc, char **argv)
 			}
 			j++;
 		}
+		j = 0;
 		i++;
 	}
 	if (!repeat_checker(argc, argv))
@@ -100,7 +101,6 @@ void	init_stack_values(int argc, char **argv, t_stack *stk)
 	new_node = malloc(sizeof(t_node *) * 1);
 	if (!new_node)
 		return ;
-	new_node->index = i - 1;
 	new_node->data = ft_atoi2(argv[i++]);
 	stk->node = new_node;
 	stk->top = stk->node;
@@ -111,7 +111,6 @@ void	init_stack_values(int argc, char **argv, t_stack *stk)
 		if (!new_node)
 			return ;
 		new_node->data = ft_atoi2(argv[i]);
-		new_node->index = i - 1;
 		stk->node->next = new_node;
 		stk->node = stk->node->next;
 		stk->node->next = NULL;
@@ -152,16 +151,17 @@ int	main(int argc, char **argv)
 		return (-1);
 	init_stack_values(argc, argv, &a);
 	init_stack(&b);
+	final_index(&a);
 	sort_three(&a);
 	a.node = a.top;
 	while (a.node != NULL)
 	{
-		printf("%d %d\n", a.node->data, a.node->index);
+		printf("%d %d\n", a.node->data, a.node->final_index);
 		a.node = a.node->next;
 	}
 	// while (b.node != NULL)
 	// {
-	// 	printf("%d %d\n", b.node->data, b.node->index);
+	// 	printf("%d\n", b.node->data);
 	// 	b.node = b.node->next;
 	// }
 	free_stack(&a);

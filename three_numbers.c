@@ -1,71 +1,102 @@
 #include "push_swap.h"
 
-static int	get_min(const t_stack *stk, int begin)
+// static int	get_min(const t_stack *stk, int begin)
+// {
+// 	t_node	*node;
+// 	int		min_index;
+// 	int		min;
+// 	int		i;
+
+// 	node = stk->top;
+// 	i = 0;
+// 	while (i++ < begin)
+// 		node = node->next;
+// 	min = node->data;
+// 	min_index = 0;
+// 	i = 0;
+// 	while (node->next)
+// 	{
+// 		node = node->next;
+// 		if (node->data < min)
+// 		{
+// 			min = node->data;
+// 			min_index = i;
+// 		}
+// 		i++;
+// 	}
+// 	printf("%d\n", min_index);
+// 	return (min_index);
+// } //función ver num más grandes = posición final??
+
+void	final_index(const t_stack *stk)
 {
 	t_node	*node;
-	int		min_index;
-	int		min;
-	int		i;
+	t_node	*act;
+	int		tmp_index;
 
-	node = stk->top;
-	i = 0;
-	while (i++ < begin)
-		node = node->next;
-	min = node->data;
-	min_index = node->index;
-	while (node->next)
+	act = stk->top;
+	while (act)
 	{
-		node = node->next;
-		if (node->data < min)
+		tmp_index = 0;
+		node = stk->top;
+		while (node)
 		{
-			min = node->data;
-			min_index = node->index;
+			if (node != act && act->data > node->data)
+				tmp_index++;
+			node = node->next;
 		}
+		act->final_index = tmp_index;
+		act = act->next;
 	}
-	return (min_index);
 }
 
 void	sort_three(t_stack *stk)
 {
 	t_node	*node;
-	int		min0;
-	int		min1;
 
-	min0 = get_min(stk, 0);
-	min1 = get_min(stk, 1);
 	node = stk->top;
-	if (min0 == 0 && min1 == 2)
+	if (node->final_index == 0 && node->next->final_index == 2)
 	{
 		reverse_rotate(stk);
 		swap_stack(stk);
 	}
-	else if (min0 == 1)
+	else if (node->final_index == 1)
 	{
 		if (node->data < node->next->next->data)
 			swap_stack(stk);
 		else
-			rotate(stk);
-	}
-	else if (min0 == 2)
-	{
-		if (node->data < node->next->data)
 			reverse_rotate(stk);
+	}
+	else if (node->final_index == 2)
+	{
+		if (node->next->data < node->next->next->data)
+			rotate(stk);
 		else
 		{
 			rotate(stk);
 			swap_stack(stk);
 		}
 	}
+}
 
+void	sort_four(t_stack *a, t_stack *b)
+{
+	t_node	*node;
 
+	node = a->top;
+	while (node->final_index != 3)
+		node = node->next;
+	push(a, b);
+	sort_three(a);
+	push(b, a);
 }
 
 // Case		actions
 // 1 2 3		=> no action Y
-// 1 3 2		-> rra -> 2 1 3 -> sa  -> 1 2 3 => 2 actions N
+// 1 3 2		-> rra -> 2 1 3 -> sa  -> 1 2 3 => 2 actions Y
 
 // 2 1 3		-> sa  -> 1 2 3 => 1 action Y
-// 3 1 2		-> ra  -> 1 2 3 => 1 action Y
+// 3 1 2		-> ra  -> 1 2 3 => 1 action N
 
-// 2 3 1		-> rra -> 1 2 3 => 1 action 
-// 3 2 1		-> ra  -> 2 1 3 -> sa  -> 1 2 3 => 2 actions
+// 2 3 1		-> rra -> 1 2 3 => 1 action Y
+// 3 2 1		-> ra  -> 2 1 3 -> sa  -> 1 2 3 => 2 actions Y
