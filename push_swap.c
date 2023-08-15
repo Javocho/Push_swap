@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/14 22:22:06 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:11:55 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ int	main(int argc, char **argv)
 		return (-1);
 	init_stack_values(argc, argv, &a);
 	init_stack(&b);
-	final_index(&a);
-	sort_three(&a);
+	//final_index(&a);
+	sort_four(&a, &b);
 	a.node = a.top;
 	while (a.node != NULL)
 	{

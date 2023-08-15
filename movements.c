@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:46:33 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/14 21:39:29 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:11:21 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	rotate(t_stack *stk)
 {
 	t_node	*tmp;
+	t_node	*node;
 
 	if (stk->size < 2)
 		return ;
 	tmp = stk->top;
 	stk->top = stk->top->next;
-	stk->node->next = tmp;
+	node = stk->top;
+	while(node->next)
+		node = node->next;
+	node->next = tmp;
 	tmp->next = NULL;
 }
 

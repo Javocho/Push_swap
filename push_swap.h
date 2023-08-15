@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:33:54 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/14 22:21:45 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:56:47 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void	push(t_stack *stk_out, t_stack *stk_in);
 void	swap_stack(t_stack *stk);
 void	final_index(const t_stack *stk);
 void	sort_three(t_stack *stk);
-//void	sort_four(t_stack *a, t_stack *b);
+void	sort_four(t_stack *a, t_stack *b);
 
 #endif

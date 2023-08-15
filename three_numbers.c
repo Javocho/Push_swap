@@ -54,6 +54,7 @@ void	sort_three(t_stack *stk)
 {
 	t_node	*node;
 
+	final_index(stk);
 	node = stk->top;
 	if (node->final_index == 0 && node->next->final_index == 2)
 	{
@@ -83,9 +84,12 @@ void	sort_four(t_stack *a, t_stack *b)
 {
 	t_node	*node;
 
+	final_index(a);
 	node = a->top;
-	while (node->final_index != 3)
+	while (node->final_index != 0)
 		node = node->next;
+	while(node != a->top)
+		rotate(a);
 	push(a, b);
 	sort_three(a);
 	push(b, a);
