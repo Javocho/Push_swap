@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/15 18:17:29 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:52:28 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,13 +151,14 @@ int	main(int argc, char **argv)
 		return (-1);
 	init_stack_values(argc, argv, &a);
 	init_stack(&b);
-	insertion(&a, &b);
+	final_sorting(&a, &b);
 	a.node = a.top;
 	while (a.node != NULL)
 	{
-		printf("%d %d\n", a.node->data, a.node->final_index);
+		//printf("%d %d\n", a.node->data, a.node->final_index);
 		a.node = a.node->next;
 	}
+	// b.node = b.top;
 	// while (b.node != NULL)
 	// {
 	// 	printf("%d\n", b.node->data);
