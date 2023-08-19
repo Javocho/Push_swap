@@ -1,34 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   three_numbers.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 21:52:03 by fcosta-f          #+#    #+#             */
+/*   Updated: 2023/08/19 21:52:04 by fcosta-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-// static int	get_min(const t_stack *stk, int begin)
-// {
-// 	t_node	*node;
-// 	int		min_index;
-// 	int		min;
-// 	int		i;
-
-// 	node = stk->top;
-// 	i = 0;
-// 	while (i++ < begin)
-// 		node = node->next;
-// 	min = node->data;
-// 	min_index = 0;
-// 	i = 0;
-// 	while (node->next)
-// 	{
-// 		node = node->next;
-// 		if (node->data < min)
-// 		{
-// 			min = node->data;
-// 			min_index = i;
-// 		}
-// 		i++;
-// 	}
-// 	printf("%d\n", min_index);
-// 	return (min_index);
-// } //función ver num más grandes = posición final??
-
-void	final_index(const t_stack *stk)
+void	final_index(t_stack *stk)
 {
 	t_node	*node;
 	t_node	*act;
@@ -88,7 +72,7 @@ void	sort_four(t_stack *a, t_stack *b)
 	node = a->top;
 	while (node->final_index != 0)
 		node = node->next;
-	while(node != a->top)
+	while (node != a->top)
 		rotate(a);
 	push(a, b);
 	sort_three(a);
@@ -103,14 +87,14 @@ void	sort_five(t_stack *a, t_stack *b)
 	node = a->top;
 	while (node->final_index != 0)
 		node = node->next;
-	while(node != a->top)
+	while (node != a->top)
 		rotate(a);
 	push(a, b);
 	final_index(a);
 	node = a->top;
 	while (node->final_index != 0)
 		node = node->next;
-	while(node != a->top)
+	while (node != a->top)
 		rotate(a);
 	push(a, b);
 	sort_three(a);

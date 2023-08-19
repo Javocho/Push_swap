@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:46:33 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/15 10:11:21 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/19 20:47:56 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotate(t_stack *stk)
 	tmp = stk->top;
 	stk->top = stk->top->next;
 	node = stk->top;
-	while(node->next)
+	while (node->next)
 		node = node->next;
 	node->next = tmp;
 	tmp->next = NULL;
@@ -69,5 +69,3 @@ void	swap_stack(t_stack *stk)
 	tmp->next = stk->top;
 	stk->top = tmp;
 }
-
-//CARGARME ÍNDICES Y CALCULAR ÍNDICE FINAL AL PRINCIPIO

@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 18:41:42 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/15 17:17:00 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/19 21:44:56 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,7 @@ NAME		= push_swap
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@${MAKE} -C libft/
-	@${MAKE} -C libft bonus
+	@$(MAKE) -C libft
 	$(CC) $(CFLAGS) libft/libft.a $(OBJS) -o ${NAME}
 
 -include $(DEPS)
@@ -36,7 +35,7 @@ clean:
 
 fclean: clean
 		$(RM) $(NAME)
-		@$(MAKE) -C libft
+		@$(MAKE) -C libft fclean
 
 re: fclean all
 

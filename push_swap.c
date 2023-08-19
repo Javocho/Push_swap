@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/17 21:52:28 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/19 22:14:39 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,10 @@
 
 int	ft_is_num(char c)
 {
-	return (c >= '0' && c <= '9');
+	return (c == '-' || (c >= '0' && c <= '9'));
 }
 
-int	ft_atoi2(const char *str)
-{
-	int	i;
-	int	sign;
-	int	result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	return (result * sign);
-}
-
-int	repeat_checker(int argc, char **argv)
+static int	repeat_checker(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -49,11 +26,11 @@ int	repeat_checker(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		n = ft_atoi2(argv[i]);
+		n = ft_atoi(argv[i]);
 		j = i + 1;
-		while (j < argc && n != ft_atoi2(argv[j]))
+		while (j < argc && n != ft_atoi(argv[j]))
 			j++;
-		if (j < argc)
+		if (j < argc || (n < -2147483648 || n > 2147483647)) //solo devuelve enteros atoi?? entonces no detecta eso no?
 		{
 			write(1, "error", 5);
 			return (0);
@@ -63,7 +40,7 @@ int	repeat_checker(int argc, char **argv)
 	return (1);
 }
 
-int	ft_checker(int argc, char **argv)
+static int	ft_checker(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -89,7 +66,7 @@ int	ft_checker(int argc, char **argv)
 	return (1);
 }
 
-void	init_stack_values(int argc, char **argv, t_stack *stk)
+static void	init_stack_values(int argc, char **argv, t_stack *stk)
 {
 	t_node	*new_node;
 	int		i;
@@ -98,19 +75,22 @@ void	init_stack_values(int argc, char **argv, t_stack *stk)
 	if (!stk)
 		return ;
 	stk->size = argc - 1;
-	new_node = malloc(sizeof(t_node *) * 1);
+	new_node = malloc(sizeof(t_node) * 1);
 	if (!new_node)
 		return ;
-	new_node->data = ft_atoi2(argv[i++]);
+	new_node->data = ft_atoi(argv[i++]);
 	stk->node = new_node;
 	stk->top = stk->node;
 	stk->node->next = NULL;
 	while (i < argc)
 	{
-		new_node = malloc(sizeof(t_node *) * 1);
+		new_node = malloc(sizeof(t_node) * 1);
 		if (!new_node)
+		{
+			free_stack(stk);
 			return ;
-		new_node->data = ft_atoi2(argv[i]);
+		}
+		new_node->data = ft_atoi(argv[i]);
 		stk->node->next = new_node;
 		stk->node = stk->node->next;
 		stk->node->next = NULL;
@@ -118,7 +98,7 @@ void	init_stack_values(int argc, char **argv, t_stack *stk)
 	}
 }
 
-void	init_stack(t_stack *stk)
+static void	init_stack(t_stack *stk)
 {
 	stk->size = 0;
 }
@@ -153,17 +133,7 @@ int	main(int argc, char **argv)
 	init_stack(&b);
 	final_sorting(&a, &b);
 	a.node = a.top;
-	while (a.node != NULL)
-	{
-		//printf("%d %d\n", a.node->data, a.node->final_index);
-		a.node = a.node->next;
-	}
-	// b.node = b.top;
-	// while (b.node != NULL)
-	// {
-	// 	printf("%d\n", b.node->data);
-	// 	b.node = b.node->next;
-	// }
+	print_node(a);
 	free_stack(&a);
 	free_stack(&b);
 }
