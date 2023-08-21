@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 18:41:42 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/21 04:06:54 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/21 18:12:13 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,12 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 
 NAME		= push_swap
 
-all: $(NAME)
+all:
+	@$(MAKE) -C libft 
+	@$(MAKE) $(NAME)
+	
 
 $(NAME): $(OBJS)
-	@$(MAKE) -C libft
 	$(CC) $(CFLAGS) libft/libft.a $(OBJS) -o ${NAME}
 
 -include $(DEPS)

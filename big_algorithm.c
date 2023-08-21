@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:17:10 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 16:42:19 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:24:11 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,16 @@ void	final_sorting(t_stack *a, t_stack *b, int nchunks)
 // 	return (node);
 // }
 
-void	print_node(t_stack stk)
-{
-	t_node	*node;
+// void	print_node(t_stack stk)
+// {
+// 	t_node	*node;
 
-	node = stk.top;
-	while (node)
-	{
-		printf("el contenido %d, el índice final %d, el puntero al nodo %p, el puntero siguiente %p\n", node->data, node->final_index, node, node->next);
-		node = node->next;
-	}
-}
+// 	node = stk.top;
+// 	while (node)
+// 	{
+// 		printf("el contenido %d,
+// el índice final %d, el puntero al nodo %p, el puntero siguiente
+// %p\n", node->data, node->final_index, node, node->next);
+// 		node = node->next;
+// 	}
+// }
