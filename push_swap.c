@@ -6,39 +6,11 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/19 22:14:39 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:17:11 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_is_num(char c)
-{
-	return (c == '-' || (c >= '0' && c <= '9'));
-}
-
-static int	repeat_checker(int argc, char **argv)
-{
-	int	i;
-	int	j;
-	int	n;
-
-	i = 1;
-	while (i < argc)
-	{
-		n = ft_atoi(argv[i]);
-		j = i + 1;
-		while (j < argc && n != ft_atoi(argv[j]))
-			j++;
-		if (j < argc || (n < -2147483648 || n > 2147483647)) //solo devuelve enteros atoi?? entonces no detecta eso no?
-		{
-			write(1, "error", 5);
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
 
 static int	ft_checker(int argc, char **argv)
 {
@@ -66,41 +38,33 @@ static int	ft_checker(int argc, char **argv)
 	return (1);
 }
 
-static void	init_stack_values(int argc, char **argv, t_stack *stk)
+static void	init_stack(int argc, char **argv, t_stack *stk_a, t_stack *stk_b)
 {
 	t_node	*new_node;
 	int		i;
 
 	i = 1;
-	if (!stk)
-		return ;
-	stk->size = argc - 1;
+	stk_a->size = argc - 1;
 	new_node = malloc(sizeof(t_node) * 1);
 	if (!new_node)
 		return ;
 	new_node->data = ft_atoi(argv[i++]);
-	stk->node = new_node;
-	stk->top = stk->node;
-	stk->node->next = NULL;
+	stk_a->node = new_node;
+	stk_a->top = stk_a->node;
 	while (i < argc)
 	{
 		new_node = malloc(sizeof(t_node) * 1);
 		if (!new_node)
 		{
-			free_stack(stk);
+			free_stack(stk_a);
 			return ;
 		}
-		new_node->data = ft_atoi(argv[i]);
-		stk->node->next = new_node;
-		stk->node = stk->node->next;
-		stk->node->next = NULL;
-		i++;
+		new_node->data = ft_atoi(argv[i++]);
+		stk_a->node->next = new_node;
+		stk_a->node = stk_a->node->next;
 	}
-}
-
-static void	init_stack(t_stack *stk)
-{
-	stk->size = 0;
+	stk_a->node->next = NULL;
+	stk_b->size = 0;
 }
 
 void	free_stack(t_stack *stk)
@@ -120,6 +84,21 @@ void	free_stack(t_stack *stk)
 	}
 }
 
+void	select_function(int argc, t_stack *a, t_stack *b)
+{
+	argc--;
+	if (argc == 3)
+		sort_three(a);
+	else if (argc == 4)
+		sort_four(a, b);
+	else if (argc == 5)
+		sort_five(a, b);
+	else if (argc < 500)
+		final_sorting(a, b, 4);
+	else
+		final_sorting(a, b, 8);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	a;
@@ -129,11 +108,12 @@ int	main(int argc, char **argv)
 		return (-1);
 	if (!ft_checker(argc, argv))
 		return (-1);
-	init_stack_values(argc, argv, &a);
-	init_stack(&b);
-	final_sorting(&a, &b);
+	init_stack(argc, argv, &a, &b);
+	if (already_sorted(&a) == 1)
+		return (0);
+	select_function(argc, &a, &b);
 	a.node = a.top;
-	print_node(a);
+	//print_node(a);
 	free_stack(&a);
 	free_stack(&b);
 }
