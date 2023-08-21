@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 18:24:34 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:08:35 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	free_stack(t_stack *stk)
 void	select_function(int argc, t_stack *a, t_stack *b)
 {
 	argc--;
+	if (argc == 2)
+		swap_stack(a, 'a');
 	if (argc == 3)
 		sort_three(a);
 	else if (argc == 4)
