@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 04:06:15 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 07:04:27 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:24:18 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,43 @@ int	ft_is_num(char c)
 	return (c == '-' || (c >= '0' && c <= '9'));
 }
 
+long long	ft_atoll(char *str)
+{
+	long long	neg;
+	long long	res;
+
+	neg = 1;
+	res = 0;
+	if (!str || !*str)
+		return (0);
+	while (*str && ft_strchr("\t \n", *str))
+		str++;
+	if (*str && *str == '-')
+		neg = -1;
+	if (*str && ft_strchr("+-", *str))
+		str++;
+	while (*str && ft_isdigit(*str))
+	{
+		res = (*str - '0') + (res * 10);
+		str++;
+	}
+	return (res * neg);
+}
+
 int	repeat_checker(int argc, char **argv)
 {
-	int	i;
-	int	j;
-	int	n;
+	int			i;
+	int			j;
+	long long	l;
 
 	i = 1;
 	while (i < argc)
 	{
-		n = ft_atoi(argv[i]);
+		l = ft_atoll(argv[i]);
 		j = i + 1;
-		while (j < argc && n != ft_atoi(argv[j]))
+		while (j < argc && l != ft_atoll(argv[j]))
 			j++;
-		if (j < argc || (n < -2147483648 || n > 2147483647)) //solo devuelve enteros atoi?? entonces no detecta eso no?
+		if (j < argc || (l < -2147483648 || l > 2147483647))
 		{
 			write(1, "error", 5);
 			return (0);

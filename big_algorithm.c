@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:17:10 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 12:10:41 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:57:46 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,17 @@ int	best_rotate(t_stack *stk, t_node *act)
 		return (1);
 }
 
-static void	insertion_to_chunks(t_stack *a, t_stack *b, int chunks)
+static void	divide_chunks(t_stack *a, t_stack *b, int size_chunk, int chunks)
 {
 	int		i;
 	int		maxindex;
-	int		size_chunk;
 	t_node	*node;
 
 	i = 1;
-	node = a->top;
-	final_index(a);
-	size_chunk = a->size / chunks;
 	while (i <= chunks)
 	{
-		while (node->next)
+		node = a->top;
+		while (node && node->next)
 		{
 			maxindex = size_chunk * i;
 			if (node->final_index < maxindex)
@@ -65,22 +62,25 @@ static void	insertion_to_chunks(t_stack *a, t_stack *b, int chunks)
 			else
 				node = node->next;
 		}
-		node = a->top;
 		i++;
 	}
+}
+
+static void	insertion_to_chunks(t_stack *a, t_stack *b, int chunks)
+{
+	int		size_chunk;
+
+	final_index(a);
+	size_chunk = a->size / chunks;
+	divide_chunks(a, b, size_chunk, chunks);
 	while (a->size)
 		push(a, b, 'b');
 }
 
-
-void	final_sorting(t_stack *a, t_stack *b, int nchunks)
+static void	insert_a(t_stack *a, t_stack *b, t_node *node, int i)
 {
-	int		i;
-	t_node	*node;
 	int		best_mov;
 
-	insertion_to_chunks(a, b, nchunks);
-	i = b->size - 1;
 	while (b->size >= 1)
 	{
 		node = b->top;
@@ -94,27 +94,38 @@ void	final_sorting(t_stack *a, t_stack *b, int nchunks)
 				push(b, a, 'a');
 				i--;
 			}
-			if (best_mov == 1)
+			else if (best_mov == 1)
 				rotate(b, 'b');
 			else
 				reverse_rotate(b, 'b');
 		}
 		push(b, a, 'a');
-		if (a->size >= 2 && a->top->final_index < a->top->next->final_index)
+		if (a->size >= 2 && a->top->final_index > a->top->next->final_index)
 			swap_stack(a, 'a');
 		i--;
 	}
 }
 
-t_node	*go_last(t_stack *stk)
+void	final_sorting(t_stack *a, t_stack *b, int nchunks)
 {
+	int		i;
 	t_node	*node;
 
-	node = stk->top;
-	while (node->next)
-		node = node->next;
-	return (node);
+	insertion_to_chunks(a, b, nchunks);
+	node = b->top;
+	i = b->size - 1;
+	insert_a(a, b, node, i);
 }
+
+// t_node	*go_last(t_stack *stk)
+// {
+// 	t_node	*node;
+
+// 	node = stk->top;
+// 	while (node->next)
+// 		node = node->next;
+// 	return (node);
+// }
 
 void	print_node(t_stack stk)
 {

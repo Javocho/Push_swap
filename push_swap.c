@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 12:17:11 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:00:37 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ void	select_function(int argc, t_stack *a, t_stack *b)
 		sort_four(a, b);
 	else if (argc == 5)
 		sort_five(a, b);
+	else if (argc < 22)
+		final_sorting(a, b, 2);
 	else if (argc < 500)
 		final_sorting(a, b, 4);
 	else
-		final_sorting(a, b, 8);
+		final_sorting(a, b, 9);
 }
 
 int	main(int argc, char **argv)
@@ -112,8 +114,8 @@ int	main(int argc, char **argv)
 	if (already_sorted(&a) == 1)
 		return (0);
 	select_function(argc, &a, &b);
-	a.node = a.top;
-	//print_node(a);
+	// a.node = a.top;
+	// print_node(a);
 	free_stack(&a);
 	free_stack(&b);
 }

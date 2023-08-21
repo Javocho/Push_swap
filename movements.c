@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:46:33 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 11:57:59 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:27:36 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	rotate(t_stack *stk, char c)
 	write(1, "r", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
-	//printf("%d\n", stk->top->data);
 }
 
 void	reverse_rotate(t_stack *stk, char c)
@@ -49,7 +48,6 @@ void	reverse_rotate(t_stack *stk, char c)
 	write(1, "rr", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
-	//printf("%d\n", stk->top->data);
 }
 
 void	push(t_stack *stk_out, t_stack *stk_in, char c)
@@ -67,8 +65,6 @@ void	push(t_stack *stk_out, t_stack *stk_in, char c)
 	write(1, "p", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
-	//if (stk_out->size > 1)
-		//printf("%d\n", stk_out->top->data);
 }
 
 void	swap_stack(t_stack *stk, char c)
@@ -84,33 +80,31 @@ void	swap_stack(t_stack *stk, char c)
 	write(1, "s", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
-	//printf("%d\n", stk->top->data);
-	//printf("%d\n", stk->top->data);
 }
 
-void	rotate_rotate(t_stack *a, t_stack *b)
-{
-	t_node	*tmp;
-	t_node	*node;
+// void	rotate_rotate(t_stack *a, t_stack *b)
+// {
+// 	t_node	*tmp;
+// 	t_node	*node;
 
-	if (a->size < 2)
-		return ;
-	tmp = a->top;
-	a->top = a->top->next;
-	node = a->top;
-	while (node->next)
-		node = node->next;
-	node->next = tmp;
-	tmp->next = NULL;
-	if (b->size < 2)
-		return ;
-	tmp = b->top;
-	b->top = b->top->next;
-	node = b->top;
-	while (node->next)
-		node = node->next;
-	node->next = tmp;
-	tmp->next = NULL;
-	write(1, "rr", 1);
-	write(1, "\n", 1);
-}
+// 	if (a->size < 2)
+// 		return ;
+// 	tmp = a->top;
+// 	a->top = a->top->next;
+// 	node = a->top;
+// 	while (node->next)
+// 		node = node->next;
+// 	node->next = tmp;
+// 	tmp->next = NULL;
+// 	if (b->size < 2)
+// 		return ;
+// 	tmp = b->top;
+// 	b->top = b->top->next;
+// 	node = b->top;
+// 	while (node->next)
+// 		node = node->next;
+// 	node->next = tmp;
+// 	tmp->next = NULL;
+// 	write(1, "rr", 1);
+// 	write(1, "\n", 1);
+// }
