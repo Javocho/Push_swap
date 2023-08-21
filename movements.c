@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:46:33 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 14:27:36 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:58:20 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	reverse_rotate(t_stack *stk, char c)
 	node->next = NULL;
 	tmp->next = stk->top;
 	stk->top = tmp;
-	write(1, "rr", 1);
+	write(1, "rr", 2);
 	write(1, &c, 1);
 	write(1, "\n", 1);
 }
@@ -81,30 +81,3 @@ void	swap_stack(t_stack *stk, char c)
 	write(1, &c, 1);
 	write(1, "\n", 1);
 }
-
-// void	rotate_rotate(t_stack *a, t_stack *b)
-// {
-// 	t_node	*tmp;
-// 	t_node	*node;
-
-// 	if (a->size < 2)
-// 		return ;
-// 	tmp = a->top;
-// 	a->top = a->top->next;
-// 	node = a->top;
-// 	while (node->next)
-// 		node = node->next;
-// 	node->next = tmp;
-// 	tmp->next = NULL;
-// 	if (b->size < 2)
-// 		return ;
-// 	tmp = b->top;
-// 	b->top = b->top->next;
-// 	node = b->top;
-// 	while (node->next)
-// 		node = node->next;
-// 	node->next = tmp;
-// 	tmp->next = NULL;
-// 	write(1, "rr", 1);
-// 	write(1, "\n", 1);
-// }

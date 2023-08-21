@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:17:10 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 15:57:46 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:42:19 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static void	insertion_to_chunks(t_stack *a, t_stack *b, int chunks)
 {
 	int		size_chunk;
 
-	final_index(a);
 	size_chunk = a->size / chunks;
 	divide_chunks(a, b, size_chunk, chunks);
 	while (a->size)
