@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:34:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/21 19:09:32 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:06:02 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ int	main(int argc, char **argv)
 		return (-1);
 	init_stack(argc, argv, &a, &b);
 	if (already_sorted(&a) == 1)
+	{
+		free_stack(&a);
 		return (0);
+	}
 	final_index(&a);
 	select_function(argc, &a, &b);
 	free_stack(&a);
